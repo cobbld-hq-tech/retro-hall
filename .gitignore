@@ -1,0 +1,4 @@
+# Raw client files stay out of git
+/uploads/
+*.zip
+.thumbnail

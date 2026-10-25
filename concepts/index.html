@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retro Hall: Concept Preview</title>
+<meta name="description" content="Concept preview for Retro Hall, four homepage directions for a retro video game and collectibles shop in Odessa, Texas.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="uploads/pasted-1787689140633-0.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E33028;
+    --teal:#3EC6C4;
+    --sun:#F9C623;
+    --ink:#221a17;
+    --bar:#16120f;
+    --line:rgba(255,255,255,.14);
+    --mut:rgba(255,255,255,.55);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:#ece6da;
+    font-family:'Archivo',Arial,sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;min-height:100%;
+  }
+
+  /* ---------- Control bar ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    background:var(--bar);color:#fff;
+    border-bottom:3px solid transparent;
+    border-image:repeating-linear-gradient(90deg,var(--red) 0 12px,var(--sun) 12px 24px,var(--teal) 24px 36px) 3;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    padding:11px clamp(14px,3vw,28px);
+  }
+  .brand{display:flex;align-items:center;gap:11px;flex:none}
+  .brand img{width:42px;height:42px;object-fit:cover;display:block;background:#fff;border-radius:8px;image-rendering:pixelated}
+  .brand .t{line-height:1.05}
+  .brand .t b{font:400 12px 'Press Start 2P',monospace;letter-spacing:.5px;display:block;margin-bottom:6px}
+  .brand .t span{font:700 9px 'Space Mono',monospace;letter-spacing:2px;color:var(--mut)}
+
+  .controls{display:flex;gap:16px;flex-wrap:wrap;flex:1;justify-content:center;min-width:0}
+  .group{display:flex;align-items:center;gap:9px;min-width:0;max-width:100%}
+  .group>.lab{flex:none;font:700 9px 'Space Mono',monospace;letter-spacing:2px;color:var(--mut)}
+  .seg{display:flex;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:3px;overflow-x:auto;scrollbar-width:none;min-width:0}
+  .seg::-webkit-scrollbar{display:none}
+  .seg button{
+    appearance:none;border:0;background:transparent;color:rgba(255,255,255,.72);
+    font:700 12.5px 'Archivo';letter-spacing:.3px;cursor:pointer;
+    padding:8px 14px;border-radius:7px;transition:.15s;white-space:nowrap;flex:none;
+  }
+  .seg button:hover{color:#fff}
+  .seg button:focus-visible{outline:2px solid var(--sun);outline-offset:1px}
+  .seg button[aria-pressed="true"]{background:var(--red);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+  .open{
+    flex:none;text-decoration:none;color:#fff;
+    font:700 11px 'Space Mono',monospace;letter-spacing:1px;
+    border:1px solid var(--line);border-radius:8px;padding:9px 13px;
+    transition:.15s;
+  }
+  .open:hover{background:rgba(255,255,255,.1)}
+  .open:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+
+  @media (max-width:720px){
+    .bar{gap:12px}
+    .controls{order:3;flex-basis:100%;justify-content:flex-start;flex-direction:column;gap:10px}
+    .group>.lab{width:52px}
+    .seg{flex-wrap:wrap}
+    .seg button{padding:8px 12px}
+    .open{margin-left:auto}
+  }
+
+  /* ---------- Stage ---------- */
+  .notice{
+    display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;
+    background:#f6f0e3;border-bottom:1px solid rgba(0,0,0,.08);
+    padding:9px 16px;text-align:center;
+  }
+  .notice .tag{
+    flex:none;font:700 9px 'Space Mono',monospace;letter-spacing:1.5px;color:#fff;
+    background:var(--red);padding:4px 9px;border-radius:5px;
+  }
+  .notice .msg{font:600 12px 'Archivo';color:#7a6f63}
+  .notice .msg b{color:#4a3f37}
+
+  .caption{
+    text-align:center;padding:16px 16px 4px;
+    font:700 10px 'Space Mono',monospace;letter-spacing:2px;color:#8a7f72;
+  }
+  .caption b{color:var(--red)}
+  .stagewrap{flex:1;padding:14px clamp(10px,3vw,32px) 40px;display:flex;justify-content:center}
+  .stage{position:relative;width:100%;max-width:1320px;transition:height .25s ease}
+
+  .device{
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .device.active{opacity:1;pointer-events:auto;z-index:2}
+
+  .chrome{
+    display:flex;align-items:center;gap:8px;
+    background:#dcd8d0;border:1px solid rgba(0,0,0,.14);border-bottom:none;
+    border-radius:11px 11px 0 0;padding:9px 13px;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;flex:none}
+  .chrome .url{
+    flex:1;background:#fff;border-radius:6px;padding:5px 10px;
+    font:500 11px 'Space Mono',monospace;color:#8a8a8a;text-align:center;
+  }
+  .screen{
+    position:relative;overflow:hidden;background:#fff;
+    border:1px solid rgba(0,0,0,.16);
+  }
+  .screen iframe{position:absolute;top:0;left:0;border:0;transform-origin:top left;background:#fff}
+
+  /* desktop look */
+  .device.is-desktop .screen{border-radius:0 0 11px 11px;box-shadow:0 24px 60px rgba(0,0,0,.18)}
+  .device.is-desktop .chrome{display:flex}
+
+  /* mobile look */
+  .device.is-mobile{background:#1a1613;border-radius:44px;padding:13px;box-shadow:0 28px 60px rgba(0,0,0,.3)}
+  .device.is-mobile .chrome{display:none}
+  .device.is-mobile .screen{border-radius:30px;border:0}
+
+  .loading{
+    position:absolute;inset:0;display:grid;place-items:start center;padding-top:120px;z-index:5;
+    background:#ece6da;pointer-events:none;transition:opacity .3s;
+    font:400 10px 'Press Start 2P',monospace;letter-spacing:1px;color:#a39785;
+  }
+  .loading.hide{opacity:0}
+
+  @media (prefers-reduced-motion:reduce){.stage,.device,.loading{transition:none}}
+</style>
+</head>
+<body>
+
+  <div class="bar">
+    <div class="brand">
+      <img src="uploads/pasted-1787689140633-0.png" alt="Retro Hall">
+      <div class="t"><b>RETRO HALL</b><span>CONCEPT PREVIEW</span></div>
+    </div>
+
+    <div class="controls">
+      <div class="group">
+        <span class="lab">DESIGN</span>
+        <div class="seg" id="seg-design">
+          <button data-design="crt" aria-pressed="true">CRT</button>
+          <button data-design="cart" aria-pressed="false">Cartridge Label</button>
+          <button data-design="catalog" aria-pressed="false">Collectors Catalog</button>
+          <button data-design="pixel" aria-pressed="false">8-Bit Pixel</button>
+        </div>
+      </div>
+      <div class="group">
+        <span class="lab">VIEW</span>
+        <div class="seg" id="seg-view">
+          <button data-view="desktop" aria-pressed="true">Desktop</button>
+          <button data-view="mobile" aria-pressed="false">Mobile</button>
+        </div>
+      </div>
+    </div>
+
+    <a class="open" id="openFull" href="#" target="_blank" rel="noopener">OPEN FULL PAGE ↗</a>
+  </div>
+
+  <div class="notice">
+    <span class="tag">DRAFT</span>
+    <span class="msg">These are <b>draft concepts</b>, photos are placeholders, final images still to come.</span>
+  </div>
+
+  <div class="caption">SHOWING <b id="capDesign">CRT</b> · <span id="capView">DESKTOP</span></div>
+
+  <div class="stagewrap">
+    <div class="stage" id="stage">
+      <div class="loading" id="loading">LOADING...</div>
+      <!-- devices injected by JS -->
+    </div>
+  </div>
+
+<script>
+(function () {
+  var PAGES = {
+    crt:     { src: 'Concept%20A%20-%20CRT.dc.html',                name: 'CRT' },
+    cart:    { src: 'Concept%20B%20-%20Cartridge%20Label.dc.html',   name: 'Cartridge Label' },
+    catalog: { src: 'Concept%20C%20-%20Collectors%20Catalog.dc.html', name: 'Collectors Catalog' },
+    pixel:   { src: 'Concept%20D%20-%208-Bit%20Pixel.dc.html',       name: '8-Bit Pixel' }
+  };
+  // sensible starting heights until the real content is measured
+  var FALLBACK = { desktop: 5200, mobile: 9000 };
+  var LOGICAL = { desktop: 1280, mobile: 390 };
+  // the iframe is sized to the whole page, so vh/dvh units would grow with it forever;
+  // pin them to a typical screen height instead
+  var VIRTUAL_VH = { desktop: 800, mobile: 844 };
+  var BEZEL = 26; // mobile phone padding (13px * 2)
+
+  var state = { design: 'crt', view: 'desktop' };
+  var stage = document.getElementById('stage');
+  var loading = document.getElementById('loading');
+  var devices = {};
+
+  // ---- build every device shell, all kept loaded so switching is instant ----
+  Object.keys(PAGES).forEach(function (key) {
+    var d = document.createElement('div');
+    d.className = 'device';
+    d.innerHTML =
+      '<div class="chrome">' +
+        '<span class="dot" style="background:#ff5f57"></span>' +
+        '<span class="dot" style="background:#febc2e"></span>' +
+        '<span class="dot" style="background:#28c840"></span>' +
+        '<div class="url">retrohallwtx.com</div>' +
+      '</div>' +
+      '<div class="screen"><iframe title="' + PAGES[key].name + ' concept" loading="eager"></iframe></div>';
+    stage.appendChild(d);
+    var iframe = d.querySelector('iframe');
+    iframe.src = PAGES[key].src;
+    devices[key] = { wrap: d, chrome: d.querySelector('.chrome'), screen: d.querySelector('.screen'), iframe: iframe, ready: false };
+    iframe.addEventListener('load', function () { devices[key].ready = true; hideLoaderMaybe(); layout(); });
+  });
+
+  function hideLoaderMaybe(){ if (devices[state.design] && devices[state.design].ready) loading.classList.add('hide'); }
+
+  function pinViewportUnits(iframe) {
+    try {
+      var doc = iframe.contentWindow.document;
+      doc.documentElement.style.setProperty('--pv-vh', (VIRTUAL_VH[state.view] / 100) + 'px');
+      doc.querySelectorAll('[style*="vh"]').forEach(function (el) {
+        var s = el.getAttribute('style');
+        var next = s.replace(/(\d*\.?\d+)[dsl]?vh/g, 'calc($1 * var(--pv-vh, 8px))');
+        if (next !== s) el.setAttribute('style', next);
+      });
+    } catch (e) {}
+  }
+
+  // the dc runtime stretches its root to the frame height, so scrollHeight just echoes
+  // the frame back; measure where the last in-flow section actually ends instead
+  function measure(iframe) {
+    try {
+      var win = iframe.contentWindow, doc = win.document;
+      var host = doc.querySelector('.sc-host') || doc.body;
+      var bottom = 0;
+      Array.prototype.forEach.call(host.children, function (el) {
+        var cs = win.getComputedStyle(el);
+        if (cs.position === 'fixed' || cs.position === 'absolute' || cs.display === 'none') return;
+        var b = el.getBoundingClientRect().bottom + win.scrollY + (parseFloat(cs.marginBottom) || 0);
+        if (b > bottom) bottom = b;
+      });
+      var h = Math.ceil(bottom);
+      return h > 200 ? h : null;
+    } catch (e) { return null; }
+  }
+
+  function sizeDevice(key) {
+    var dev = devices[key];
+    var view = state.view;
+    var logical = LOGICAL[view];
+    var pad = view === 'mobile' ? BEZEL : 0;
+    var avail = stage.clientWidth;
+    var scale = Math.min(1, avail / (logical + pad));
+
+    dev.wrap.className = 'device ' + (view === 'mobile' ? 'is-mobile' : 'is-desktop') + (key === state.design ? ' active' : '');
+    dev.iframe.style.width = logical + 'px';
+    pinViewportUnits(dev.iframe);
+    var measured = measure(dev.iframe);
+    // content has rendered; don't wait on the load event, which holds out for every remote photo
+    if (measured && !dev.ready) { dev.ready = true; hideLoaderMaybe(); }
+    var h = measured || FALLBACK[view];
+
+    var screenW = logical * scale;
+    dev.screen.style.width = screenW + 'px';
+    dev.screen.style.height = (h * scale) + 'px';
+    dev.chrome.style.width = screenW + 'px';
+    dev.iframe.style.height = h + 'px';
+    dev.iframe.style.transform = 'scale(' + scale + ')';
+  }
+
+  function layout() {
+    // size every device so the inactive ones are measured and ready to reveal instantly
+    Object.keys(PAGES).forEach(sizeDevice);
+    // stage height follows the active device's real box
+    stage.style.height = devices[state.design].wrap.getBoundingClientRect().height + 'px';
+  }
+
+  function apply() {
+    document.getElementById('capDesign').textContent = PAGES[state.design].name.toUpperCase();
+    document.getElementById('capView').textContent = state.view.toUpperCase();
+    document.getElementById('openFull').href = PAGES[state.design].src;
+    document.querySelectorAll('#seg-design button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.design === state.design));
+    });
+    document.querySelectorAll('#seg-view button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.view === state.view));
+    });
+    loading.classList.toggle('hide', devices[state.design].ready);
+    layout();
+  }
+
+  document.getElementById('seg-design').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    state.design = b.dataset.design; apply();
+  });
+  document.getElementById('seg-view').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    state.view = b.dataset.view; apply();
+  });
+
+  var rafPending = false;
+  window.addEventListener('resize', function () {
+    if (rafPending) return; rafPending = true;
+    requestAnimationFrame(function () { rafPending = false; layout(); });
+  });
+
+  // keep correcting height as fonts, images, and the React render settle in
+  // (faster at first so the loader clears as soon as the concept renders)
+  var ticks = 0;
+  var fast = setInterval(function () { layout(); if (++ticks > 20) clearInterval(fast); }, 250);
+  setInterval(layout, 900);
+
+  apply();
+})();
+</script>
+</body>
+</html>

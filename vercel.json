@@ -1,0 +1,11 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/concepts/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    }
+  ]
+}

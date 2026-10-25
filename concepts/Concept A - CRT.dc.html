@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Retro Hall Video Games and Collectibles</title>
+<meta name="description" content="Retro games, consoles, trading cards, Funko, and comics in Odessa, Texas. We buy, sell, trade, and do free appraisals.">
+<meta property="og:title" content="Retro Hall Video Games and Collectibles">
+<meta property="og:description" content="Retro games, consoles, trading cards, Funko, and comics in Odessa, Texas.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0f0d'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' fill='%234ee27a' text-anchor='middle'%3ERH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0c0f0d;color:#e6ece8;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#4ee27a;text-decoration:none}a:hover{color:#8af0ac}
+::selection{background:#4ee27a;color:#0c0f0d}
+input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid #4ee27a;outline-offset:2px}
+@media (max-width:860px){
+.ra-navlinks{display:none!important}
+.ra-split{grid-template-columns:1fr!important}
+.ra-platform{grid-template-columns:1fr!important}
+.ra-formgrid{grid-template-columns:1fr!important}
+.ra-visit{grid-template-columns:1fr!important}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<sc-if value="{{ scanlines }}" hint-placeholder-val="{{ true }}">
+<div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0.05;background:repeating-linear-gradient(0deg,#000000 0px,#000000 1px,transparent 1px,transparent 3px)"></div>
+</sc-if>
+<header style="position:sticky;top:0;z-index:50;height:68px;display:flex;align-items:center;background:rgba(12,15,13,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #1e2621">
+  <div style="max-width:1200px;margin:0 auto;width:100%;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-sizing:border-box">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;color:#e6ece8">
+      <span style="width:36px;height:36px;display:grid;place-items:center;border:1px solid #4ee27a;border-radius:6px;font-family:'Geist Mono',monospace;font-size:13px;color:#4ee27a;font-weight:600">RH</span>
+      <span style="display:flex;flex-direction:column;line-height:1.15">
+        <span style="font-family:'Geist Mono',monospace;font-weight:600;font-size:14px;letter-spacing:0.06em">RETRO HALL</span>
+        <span style="font-size:11px;color:#7d8a80">Odessa, TX</span>
+      </span>
+    </a>
+    <nav class="ra-navlinks" style="display:flex;gap:26px;font-size:14px">
+      <a href="#case" style="color:#aab7ae" style-hover="color:#4ee27a">The case</a>
+      <a href="#platforms" style="color:#aab7ae" style-hover="color:#4ee27a">Platforms</a>
+      <a href="#trade" style="color:#aab7ae" style-hover="color:#4ee27a">Trade in</a>
+      <a href="#about" style="color:#aab7ae" style-hover="color:#4ee27a">About</a>
+      <a href="#visit" style="color:#aab7ae" style-hover="color:#4ee27a">Visit</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:18px">
+      <a href="tel:+14326539934" class="ra-navlinks" style="display:flex;align-items:center;gap:7px;font-family:'Geist Mono',monospace;font-size:13px;color:#aab7ae" style-hover="color:#4ee27a"><i class="ph ph-phone"></i>(432) 653-9934</a>
+      <a href="#trade" style="background:#4ee27a;color:#0c0f0d;font-weight:600;font-size:14px;padding:10px 16px;border-radius:6px" style-hover="background:#8af0ac;color:#0c0f0d" style-active="transform:translateY(1px)">Start a trade</a>
+    </div>
+  </div>
+</header>
+<section id="top" style="position:relative;min-height:calc(100dvh - 68px);display:grid;align-items:end;overflow:hidden">
+  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tara%20Angel%27s%20Magic%20Cards%20%26%20Games%20at%20Heritage%20Plaza%2C%20Tallahassee%2C%20Florida.jpg?width=1600" alt="Inside a collectibles shop, shelves of games and cards" data-fallback="https://picsum.photos/seed/retro-hall-glass-case-cartridges/1800/1100" onError="{{ onImgErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#111613">
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,15,13,0.5) 0%,rgba(12,15,13,0.93) 100%)"></div>
+  <div style="position:relative;max-width:1200px;margin:0 auto;width:100%;padding:5rem 24px 72px;box-sizing:border-box">
+    <p style="font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:0.14em;color:#4ee27a;margin:0 0 14px">ODESSA, TEXAS</p>
+    <h1 style="font-size:clamp(34px,5vw,58px);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin:0 0 18px;max-width:720px">If it's in the case, it's the only one we have.</h1>
+    <p style="font-size:18px;line-height:1.55;color:#c3cec6;margin:0 0 28px;max-width:460px">Retro games, consoles, cards, and comics. See what's here before you make the drive.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="#case" style="background:#4ee27a;color:#0c0f0d;font-weight:600;font-size:15px;padding:13px 22px;border-radius:6px" style-hover="background:#8af0ac;color:#0c0f0d" style-active="transform:translateY(1px)">See the case</a>
+      <a href="#trade" style="border:1px solid #3a4a40;color:#e6ece8;font-weight:500;font-size:15px;padding:12px 22px;border-radius:6px" style-hover="border-color:#4ee27a;color:#4ee27a" style-active="transform:translateY(1px)">Start a trade</a>
+    </div>
+  </div>
+</section>
+<section id="case" style="padding:88px 0 76px;border-top:1px solid #1e2621">
+  <div data-reveal="" style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;box-sizing:border-box">
+    <h2 style="font-size:clamp(26px,3vw,34px);font-weight:700;letter-spacing:-0.01em;margin:0">In the case now</h2>
+    <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#5d6961">Sample stock shown for this mockup</span>
+  </div>
+  <div data-reveal="" style="display:grid;grid-auto-flow:column;grid-auto-columns:272px;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:28px 24px 12px;scrollbar-width:thin;scrollbar-color:#2a352e transparent">
+    <sc-for list="{{ items }}" as="item" hint-placeholder-count="10">
+      <article style="scroll-snap-align:start;background:#111613;border:1px solid #202a24;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.2s ease,border-color 0.2s ease" style-hover="transform:translateY(-3px);border-color:#33453a">
+        <img src="{{ item.img }}" alt="{{ item.alt }}" loading="lazy" data-fallback="{{ item.fallback }}" onError="{{ onImgErr }}" style="width:100%;height:180px;object-fit:cover;background:#161c18;display:block">
+        <div style="padding:16px;display:flex;flex-direction:column;gap:7px;flex:1">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#4ee27a;text-transform:uppercase">{{ item.plat }}</span>
+          <h3 style="font-size:16px;font-weight:600;margin:0;line-height:1.3">{{ item.title }}</h3>
+          <p style="font-size:13px;color:#93a098;margin:0">{{ item.cond }}</p>
+          <div style="margin-top:auto;padding-top:10px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600">{{ item.price }}</span>
+            <a href="#trade" onClick="{{ item.onAsk }}" style="border:1px solid #4ee27a;color:#4ee27a;font-size:12px;font-weight:600;padding:7px 12px;border-radius:6px" style-hover="background:rgba(78,226,122,0.12);color:#4ee27a" style-active="transform:translateY(1px)">Ask about this</a>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+<section id="platforms" style="padding:88px 0;border-top:1px solid #1e2621">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;box-sizing:border-box">
+    <div data-reveal="">
+      <h2 style="font-size:clamp(26px,3vw,34px);font-weight:700;letter-spacing:-0.01em;margin:0 0 8px">Browse by platform</h2>
+      <p style="color:#93a098;font-size:15px;margin:0 0 28px">Pick a shelf. Everything listed is physically in the store.</p>
+    </div>
+    <div data-reveal="" class="ra-platform" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">NES</span><span style="font-size:12px;color:#7d8a80">8-bit cartridges</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">SNES</span><span style="font-size:12px;color:#7d8a80">16-bit cartridges</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">Nintendo 64</span><span style="font-size:12px;color:#7d8a80">Carts and controllers</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">GameCube</span><span style="font-size:12px;color:#7d8a80">Discs and memory cards</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">Genesis</span><span style="font-size:12px;color:#7d8a80">Sega 16-bit</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">PlayStation</span><span style="font-size:12px;color:#7d8a80">Black label discs</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">Super Famicom</span><span style="font-size:12px;color:#7d8a80">Japanese imports</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">Trading cards</span><span style="font-size:12px;color:#7d8a80">Graded and raw singles</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">Funko</span><span style="font-size:12px;color:#7d8a80">Boxed and vaulted</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+      <a href="#case" style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:#111613;border:1px solid #202a24;border-radius:6px;color:#e6ece8" style-hover="border-color:#4ee27a;color:#e6ece8" style-active="transform:translateY(1px)"><span><span style="font-family:'Geist Mono',monospace;font-size:17px;font-weight:600;display:block">Comics and tabletop</span><span style="font-size:12px;color:#7d8a80">Bagged, boarded, boxed</span></span><i class="ph ph-arrow-right" style="color:#4ee27a"></i></a>
+    </div>
+  </div>
+</section>
+<section id="trade" style="padding:88px 0;border-top:1px solid #1e2621;background:#0e120f">
+  <div class="ra-split" style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:5fr 7fr;gap:48px;box-sizing:border-box">
+    <div data-reveal="">
+      <p style="font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:0.14em;color:#4ee27a;margin:0 0 14px">BUY, SELL, TRADE</p>
+      <h2 style="font-size:clamp(26px,3vw,36px);font-weight:700;letter-spacing:-0.01em;margin:0 0 16px">Got games sitting in a closet?</h2>
+      <p style="color:#b7c2ba;font-size:16px;line-height:1.6;margin:0 0 28px">Send photos or bring it all in. We look it up, check condition, and give you a number. Appraisals are free, and starting one takes about two minutes from your phone.</p>
+      <div style="display:grid;gap:18px">
+        <div style="display:flex;gap:14px;align-items:flex-start"><i class="ph ph-camera" style="color:#4ee27a;font-size:22px;margin-top:2px"></i><div><strong style="font-size:15px">Send photos first</strong><p style="margin:4px 0 0;font-size:14px;color:#93a098">Labels, boxes, and card fronts. A photo of the whole pile works too.</p></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start"><i class="ph ph-magnifying-glass" style="color:#4ee27a;font-size:22px;margin-top:2px"></i><div><strong style="font-size:15px">We check it out</strong><p style="margin:4px 0 0;font-size:14px;color:#93a098">Condition, completeness, and what it actually sells for.</p></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start"><i class="ph ph-handshake" style="color:#4ee27a;font-size:22px;margin-top:2px"></i><div><strong style="font-size:15px">Cash, credit, or trade</strong><p style="margin:4px 0 0;font-size:14px;color:#93a098">Your call. No pressure either way.</p></div></div>
+      </div>
+    </div>
+    <div data-reveal="" style="background:#111613;border:1px solid #202a24;border-radius:8px;padding:28px">
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="display:grid;gap:20px">
+          <div>
+            <label for="a-what" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">What do you have</label>
+            <textarea id="a-what" rows="4" value="{{ formWhat }}" onChange="{{ onWhat }}" style="width:100%;box-sizing:border-box;background:#0c0f0d;border:1px solid #2f3b33;border-radius:6px;color:#e6ece8;padding:12px;font-family:inherit;font-size:14px;resize:vertical"></textarea>
+            <p style="margin:6px 0 0;font-size:12px;color:#93a098">Titles, platform, and rough condition. A list on paper works too.</p>
+          </div>
+          <div>
+            <label for="a-photos" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Photos</label>
+            <input id="a-photos" type="file" multiple="" accept="image/*" style="width:100%;box-sizing:border-box;background:#0c0f0d;border:1px solid #2f3b33;border-radius:6px;color:#93a098;padding:10px;font-family:inherit;font-size:13px">
+            <p style="margin:6px 0 0;font-size:12px;color:#93a098">Optional. Clear shots of labels help us quote faster.</p>
+          </div>
+          <div class="ra-formgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div>
+              <label for="a-name" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Your name</label>
+              <input id="a-name" type="text" value="{{ formName }}" onChange="{{ onName }}" style="width:100%;box-sizing:border-box;background:#0c0f0d;border:1px solid #2f3b33;border-radius:6px;color:#e6ece8;padding:12px;font-family:inherit;font-size:14px">
+            </div>
+            <div>
+              <label for="a-contact" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Phone or email</label>
+              <input id="a-contact" type="text" value="{{ formContact }}" onChange="{{ onContact }}" style="width:100%;box-sizing:border-box;background:#0c0f0d;border:1px solid #2f3b33;border-radius:6px;color:#e6ece8;padding:12px;font-family:inherit;font-size:14px">
+            </div>
+          </div>
+          <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+            <div role="alert" style="border:1px solid #ff9d8a;color:#ffb4a5;background:rgba(255,157,138,0.08);padding:12px 14px;border-radius:6px;font-size:14px;display:flex;gap:8px;align-items:center"><i class="ph ph-warning-circle"></i><span>{{ errMsg }}</span></div>
+          </sc-if>
+          <button type="submit" style="background:#4ee27a;color:#0c0f0d;font-weight:600;font-size:15px;padding:14px;border:none;border-radius:6px;cursor:pointer;font-family:inherit" style-hover="background:#8af0ac" style-active="transform:translateY(1px)">Send it over</button>
+          <p style="margin:0;font-size:13px;color:#93a098;text-align:center">Or call <a href="tel:+14326539934" style="font-family:'Geist Mono',monospace">(432) 653-9934</a>.</p>
+        </form>
+      </sc-if>
+      <sc-if value="{{ isSubmitted }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:36px 12px;display:grid;gap:10px;justify-items:center">
+          <i class="ph ph-check-circle" style="font-size:44px;color:#4ee27a"></i>
+          <h3 style="margin:0;font-size:22px;font-weight:700">Got it.</h3>
+          <p style="margin:0;font-size:15px;color:#b7c2ba;max-width:340px">We'll look it over and get back to you. If it can't wait, call <a href="tel:+14326539934" style="font-family:'Geist Mono',monospace">(432) 653-9934</a>.</p>
+          <button type="button" onClick="{{ onReset }}" style="margin-top:8px;border:1px solid #3a4a40;background:none;color:#e6ece8;font-size:14px;padding:10px 18px;border-radius:6px;cursor:pointer;font-family:inherit" style-hover="border-color:#4ee27a;color:#4ee27a" style-active="transform:translateY(1px)">Send another</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+<section id="about" style="padding:88px 0;border-top:1px solid #1e2621">
+  <div class="ra-split" data-reveal="" style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:6fr 6fr;gap:48px;align-items:center;box-sizing:border-box">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Shelves%20of%20board%20and%20tabletop%20games.jpg?width=1200" alt="Shelves of boxed games inside the shop" loading="lazy" data-fallback="https://picsum.photos/seed/retro-hall-shop-shelves-interior/1000/780" onError="{{ onImgErr }}" style="width:100%;border-radius:6px;border:1px solid #202a24;display:block">
+    <div>
+      <h2 style="font-size:clamp(26px,3vw,36px);font-weight:700;letter-spacing:-0.01em;margin:0 0 16px">The collection outgrew the house.</h2>
+      <p style="color:#b7c2ba;font-size:16px;line-height:1.65;margin:0 0 14px">I've been collecting since I was a kid. Garage sales, auctions, estate finds. Somewhere along the way the collection got bigger than the house, so my wife and I opened the shop.</p>
+      <p style="color:#b7c2ba;font-size:16px;line-height:1.65;margin:0 0 14px">Most of what's in the case came from somebody in West Texas who wanted it to go to a good home. That includes the Japanese stuff, the Famicom and Super Famicom shelves people drive out here for.</p>
+      <p style="color:#b7c2ba;font-size:16px;line-height:1.65;margin:0 0 20px">If you've got games sitting in a closet, bring them in. I'll tell you what they're worth, and I'll be straight with you either way.</p>
+      <p style="font-family:'Geist Mono',monospace;font-size:13px;color:#4ee27a;margin:0">Retro Hall, Odessa</p>
+    </div>
+  </div>
+</section>
+<section id="visit" style="padding:88px 0;border-top:1px solid #1e2621">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;box-sizing:border-box">
+    <h2 data-reveal="" style="font-size:clamp(26px,3vw,34px);font-weight:700;letter-spacing:-0.01em;margin:0 0 32px">Come see it in person</h2>
+    <div class="ra-visit" data-reveal="" style="display:grid;grid-template-columns:5fr 7fr;gap:48px">
+      <div style="display:grid;gap:24px;align-content:start">
+        <div>
+          <p style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#4ee27a;text-transform:uppercase;margin:0 0 8px">Address</p>
+          <div style="height:22px;border-bottom:1px dashed #2f3b33;max-width:280px"></div>
+        </div>
+        <div>
+          <p style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#4ee27a;text-transform:uppercase;margin:0 0 8px">Hours</p>
+          <div style="height:22px;border-bottom:1px dashed #2f3b33;max-width:280px"></div>
+        </div>
+        <div>
+          <p style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#4ee27a;text-transform:uppercase;margin:0 0 8px">Phone</p>
+          <a href="tel:+14326539934" style="font-family:'Geist Mono',monospace;font-size:16px;color:#e6ece8" style-hover="color:#4ee27a">(432) 653-9934</a>
+        </div>
+        <div>
+          <p style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#4ee27a;text-transform:uppercase;margin:0 0 8px">Instagram</p>
+          <a href="https://instagram.com/retrohallwtx" target="_blank" rel="noopener" style="font-family:'Geist Mono',monospace;font-size:16px;color:#e6ece8" style-hover="color:#4ee27a">@retrohallwtx</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;color:#b7c2ba;font-size:14px"><i class="ph ph-star" style="color:#4ee27a"></i>4.7 stars from 88 reviews on Google</div>
+      </div>
+      <div aria-label="Map" style="min-height:340px;background:#111613;border:1px solid #202a24;border-radius:6px;background-image:repeating-linear-gradient(0deg,#151c17 0px,#151c17 1px,transparent 1px,transparent 48px),repeating-linear-gradient(90deg,#151c17 0px,#151c17 1px,transparent 1px,transparent 48px)"></div>
+    </div>
+  </div>
+</section>
+<footer style="border-top:1px solid #1e2621;padding:36px 0">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;box-sizing:border-box">
+    <div>
+      <p style="font-family:'Geist Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.06em;margin:0">RETRO HALL</p>
+      <p style="font-size:12px;color:#7d8a80;margin:4px 0 0">Video games and collectibles, Odessa, TX</p>
+    </div>
+    <div style="display:flex;gap:22px;font-size:13px;flex-wrap:wrap;align-items:center">
+      <a href="tel:+14326539934" style="color:#aab7ae" style-hover="color:#4ee27a">(432) 653-9934</a>
+      <a href="mailto:Retrohallwtx@gmail.com" style="color:#aab7ae" style-hover="color:#4ee27a">Retrohallwtx@gmail.com</a>
+      <a href="https://instagram.com/retrohallwtx" target="_blank" rel="noopener" style="color:#aab7ae" style-hover="color:#4ee27a">@retrohallwtx</a>
+      <a href="#trade" style="color:#4ee27a;font-weight:600">Start a trade</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;scanlines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Texture&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { formWhat: '', formName: '', formContact: '', status: 'idle', errMsg: '' };
+  componentDidMount() {
+    document.documentElement.lang = 'en';
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || (this.props.motion === false)) return;
+    setTimeout(() => {
+      const els = [...document.querySelectorAll('[data-reveal]')];
+      els.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(18px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      });
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          io.unobserve(e.target);
+        }
+      }), { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    }, 60);
+  }
+  renderVals() {
+    const wiki = n => 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(n) + '?width=800';
+    const data = [
+      { title: 'EarthBound', plat: 'SNES', cond: 'Cart only, authentic, tested', price: '$245', seed: 'retro-hall-earthbound-snes-cart', wiki: 'SNES-Mod1-Console-Set.jpg' },
+      { title: 'Chrono Trigger', plat: 'SNES', cond: 'Cart, saves working', price: '$180', seed: 'retro-hall-chrono-trigger-snes', wiki: 'Nintendo-Super-NES-Console-FL.jpg' },
+      { title: 'The Legend of Zelda', plat: 'NES', cond: 'Gold cart, new battery', price: '$65', seed: 'retro-hall-zelda-gold-cart-nes', wiki: 'NES-Console-Set.jpg' },
+      { title: 'Super Mario 64', plat: 'N64', cond: 'Cart, label clean', price: '$42', seed: 'retro-hall-mario64-n64-cart', wiki: 'N64-Console-Set.jpg' },
+      { title: 'Metroid Prime', plat: 'GameCube', cond: 'Complete in case', price: '$38', seed: 'retro-hall-metroid-prime-gamecube', wiki: 'GameCube-Set.jpg' },
+      { title: 'Sonic the Hedgehog 2', plat: 'Genesis', cond: 'Boxed with manual', price: '$30', seed: 'retro-hall-sonic2-genesis-box', wiki: 'Sega-Genesis-Mod1-Bare.jpg' },
+      { title: 'Symphony of the Night', plat: 'PS1', cond: 'Black label, complete', price: '$320', seed: 'retro-hall-sotn-ps1-black-label', wiki: 'PSX-Console-wController.png' },
+      { title: 'Fire Emblem: Monshou no Nazo', plat: 'Super Famicom', cond: 'Boxed Japanese import', price: '$55', seed: 'retro-hall-super-famicom-import-box', wiki: 'Nintendo-Super-Famicom-Set-FL.png' },
+      { title: 'Charizard, Base Set holo', plat: 'Pokemon TCG', cond: 'Graded PSA 7', price: '$420', seed: 'retro-hall-charizard-graded-slab', wiki: 'Pokemon collection.jpg' },
+      { title: 'Mega Man Funko Pop', plat: 'Funko', cond: 'Boxed, vaulted', price: '$45', seed: 'retro-hall-funko-megaman-boxed', wiki: 'Funko pops in a Jerusalem toy shop.jpg' }
+    ];
+    const items = data.map(it => ({
+      ...it,
+      img: wiki(it.wiki),
+      fallback: 'https://picsum.photos/seed/' + it.seed + '/560/400',
+      alt: it.title + ' for ' + it.plat + ', ' + it.cond.toLowerCase(),
+      onAsk: () => this.setState({
+        formWhat: 'Asking about: ' + it.title + ' (' + it.plat + ', ' + it.cond + ', ' + it.price + ')',
+        status: 'idle', errMsg: ''
+      })
+    }));
+    const set = k => e => this.setState({ [k]: e.target.value });
+    return {
+      scanlines: this.props.scanlines ?? true,
+      items,
+      formWhat: this.state.formWhat, formName: this.state.formName, formContact: this.state.formContact,
+      onWhat: set('formWhat'), onName: set('formName'), onContact: set('formContact'),
+      onImgErr: e => { const fb = e.target.getAttribute('data-fallback'); if (fb && e.target.src !== fb) e.target.src = fb; },
+      notSubmitted: this.state.status !== 'submitted',
+      isSubmitted: this.state.status === 'submitted',
+      isError: this.state.status === 'error',
+      errMsg: this.state.errMsg,
+      onSubmit: e => {
+        e.preventDefault();
+        if (!this.state.formWhat.trim() || !this.state.formContact.trim()) {
+          this.setState({ status: 'error', errMsg: 'Tell us what you have and how to reach you. Those two are all we need.' });
+        } else {
+          this.setState({ status: 'submitted', errMsg: '' });
+        }
+      },
+      onReset: () => this.setState({ formWhat: '', formName: '', formContact: '', status: 'idle', errMsg: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

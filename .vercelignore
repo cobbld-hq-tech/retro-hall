@@ -1,0 +1,5 @@
+# Client source files and notes: kept in the project, not on the live site
+/uploads/
+*.zip
+.thumbnail
+PREVIEW-PROMPT.md
