@@ -151,10 +151,10 @@
       <div class="group">
         <span class="lab">DESIGN</span>
         <div class="seg" id="seg-design">
-          <button data-design="crt" aria-pressed="true">CRT</button>
+          <button data-design="pixel" aria-pressed="true">8-Bit Pixel</button>
+          <button data-design="crt" aria-pressed="false">CRT</button>
           <button data-design="cart" aria-pressed="false">Cartridge Label</button>
           <button data-design="catalog" aria-pressed="false">Collectors Catalog</button>
-          <button data-design="pixel" aria-pressed="false">8-Bit Pixel</button>
         </div>
       </div>
       <div class="group">
@@ -174,7 +174,7 @@
     <span class="msg">These are <b>draft concepts</b>, photos are placeholders, final images still to come.</span>
   </div>
 
-  <div class="caption">SHOWING <b id="capDesign">CRT</b> · <span id="capView">DESKTOP</span></div>
+  <div class="caption">SHOWING <b id="capDesign">8-BIT PIXEL</b> · <span id="capView">DESKTOP</span></div>
 
   <div class="stagewrap">
     <div class="stage" id="stage">
@@ -186,10 +186,10 @@
 <script>
 (function () {
   var PAGES = {
+    pixel:   { src: 'Concept%20D%20-%208-Bit%20Pixel.dc.html',       name: '8-Bit Pixel' },
     crt:     { src: 'Concept%20A%20-%20CRT.dc.html',                name: 'CRT' },
     cart:    { src: 'Concept%20B%20-%20Cartridge%20Label.dc.html',   name: 'Cartridge Label' },
-    catalog: { src: 'Concept%20C%20-%20Collectors%20Catalog.dc.html', name: 'Collectors Catalog' },
-    pixel:   { src: 'Concept%20D%20-%208-Bit%20Pixel.dc.html',       name: '8-Bit Pixel' }
+    catalog: { src: 'Concept%20C%20-%20Collectors%20Catalog.dc.html', name: 'Collectors Catalog' }
   };
   // sensible starting heights until the real content is measured
   var FALLBACK = { desktop: 5200, mobile: 9000 };
@@ -199,7 +199,7 @@
   var VIRTUAL_VH = { desktop: 800, mobile: 844 };
   var BEZEL = 26; // mobile phone padding (13px * 2)
 
-  var state = { design: 'crt', view: 'desktop' };
+  var state = { design: 'pixel', view: 'desktop' };
   var stage = document.getElementById('stage');
   var loading = document.getElementById('loading');
   var devices = {};
