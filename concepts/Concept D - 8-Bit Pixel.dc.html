@@ -32,7 +32,20 @@ input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px soli
 @media (max-width:1100px){
 .rd-navlinks{display:none!important}
 }
+#rd-map{position:relative;z-index:0;font:inherit}
+#rd-map .leaflet-tile-pane{filter:sepia(0.15) saturate(0.9)}
+#rd-map .rd-marker{width:0!important;height:0!important}
+#rd-map .rd-callout{position:absolute;left:0;bottom:18px;transform:translateX(-50%);display:block;width:200px;text-decoration:none;background:#ffffff;border:3px solid #221a17;box-shadow:4px 4px 0 #221a17;color:#221a17;font-family:'Archivo',sans-serif}
+#rd-map .rd-callout:hover{box-shadow:4px 4px 0 #e33028;color:#221a17}
+#rd-map .rd-callout img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 20%;display:block;border-bottom:3px solid #221a17}
+#rd-map .rd-callout b{display:block;padding:10px 12px 0;font-family:'Press Start 2P',monospace;font-size:10px;font-weight:400}
+#rd-map .rd-callout span{display:block;padding:3px 12px 0;font-size:12px;line-height:1.4;color:#7a6f63;font-weight:500}
+#rd-map .rd-callout em{display:block;padding:8px 12px 11px;font-style:normal;font-size:11px;font-weight:700;color:#e33028;text-transform:uppercase;letter-spacing:0.05em}
+#rd-map .rd-callout:after{content:"";position:absolute;left:50%;bottom:-11px;margin-left:-9px;border:9px solid transparent;border-bottom:0;border-top:11px solid #221a17}
+#rd-map .rd-dot{position:absolute;left:-7px;top:-7px;width:14px;height:14px;box-sizing:border-box;background:#e33028;border:3px solid #221a17}
 @media (max-width:860px){
+#rd-map{height:400px!important}
+#rd-map .rd-callout{width:160px}
 .rd-hero{grid-template-columns:1fr!important}
 .rd-split{grid-template-columns:1fr!important}
 .rd-platform{grid-template-columns:repeat(2,1fr)!important}
@@ -222,7 +235,7 @@ input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px soli
         </div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600"><i class="ph-bold ph-star" style="color:#e33028"></i>4.7 stars from 88 reviews on Google</div>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=3126+Andrews+Hwy%2C+Odessa%2C+TX+79762" target="_blank" rel="noopener" aria-label="Open the Retro Hall storefront in Google Maps" style="display:block"><img src="uploads/storefront.jpg" alt="The Retro Hall storefront, with the store banner over the front door" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:4px solid #221a17;box-shadow:8px 8px 0 #ffc72c;box-sizing:border-box"></a>
+      <div id="rd-map" role="region" aria-label="Map showing Retro Hall at 3126 Andrews Hwy, Odessa" style="height:460px;border:4px solid #221a17;box-shadow:8px 8px 0 #ffc72c;background:#f0e8d8;box-sizing:border-box;"></div>
     </div>
   </div>
 </section>
@@ -249,6 +262,7 @@ class Component extends DCLogic {
   state = { formWhat: '', formName: '', formContact: '', status: 'idle', errMsg: '' };
   componentDidMount() {
     document.documentElement.lang = 'en';
+    setTimeout(() => this.mountMap(), 0);
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || (this.props.motion === false)) return;
     setTimeout(() => {
@@ -267,6 +281,34 @@ class Component extends DCLogic {
       }), { threshold: 0.12 });
       els.forEach(el => io.observe(el));
     }, 60);
+  }
+  mountMap() {
+    const el = document.getElementById('rd-map');
+    if (!el || el.dataset.ready) return;
+    el.dataset.ready = '1';
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+    document.head.appendChild(css);
+    const js = document.createElement('script');
+    js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    js.onload = () => {
+      const L = window.L, store = [31.8725779, -102.3816408];
+      const directions = 'https://www.google.com/maps/search/?api=1&query=3126+Andrews+Hwy%2C+Odessa%2C+TX+79762';
+      const map = L.map(el, { scrollWheelZoom: false }).setView(store, 16);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      L.marker(store, { keyboard: false, icon: L.divIcon({ className: 'rd-marker', iconSize: [0, 0], iconAnchor: [0, 0], html:
+        '<a class="rd-callout" href="' + directions + '" target="_blank" rel="noopener">' +
+          '<img src="uploads/storefront.jpg" alt="The Retro Hall storefront, with the store banner over the front door">' +
+          '<b>Retro Hall</b><span>3126 Andrews Hwy, Odessa</span><em>Get directions ↗</em>' +
+        '</a><i class="rd-dot"></i>' }) }).addTo(map);
+      // drop the pin below center so the card above it stays in view
+      map.panBy([0, -120], { animate: false });
+    };
+    document.head.appendChild(js);
   }
   renderVals() {
     const wiki = n => 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(n) + '?width=800';
