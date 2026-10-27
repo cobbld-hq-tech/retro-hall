@@ -100,9 +100,11 @@
 
   .device{
     position:absolute;top:0;left:50%;transform:translateX(-50%);
-    opacity:0;pointer-events:none;transition:opacity .25s ease;
+    opacity:0;pointer-events:none;visibility:hidden;
+    /* hidden after the fade so inactive concepts stop painting their animations */
+    transition:opacity .25s ease,visibility 0s linear .25s;
   }
-  .device.active{opacity:1;pointer-events:auto;z-index:2}
+  .device.active{opacity:1;pointer-events:auto;visibility:visible;z-index:2;transition-delay:0s}
 
   .chrome{
     display:flex;align-items:center;gap:8px;
@@ -199,12 +201,16 @@
   var VIRTUAL_VH = { desktop: 800, mobile: 844 };
   var BEZEL = 26; // mobile phone padding (13px * 2)
 
+  // each concept boots React and compiles itself in the browser; four at once is too much
+  // for a phone, so small or touch screens only ever keep the concept on show loaded
+  var LIGHT = window.matchMedia('(max-width: 720px), (pointer: coarse)').matches;
+
   var state = { design: 'pixel', view: 'desktop' };
   var stage = document.getElementById('stage');
   var loading = document.getElementById('loading');
   var devices = {};
 
-  // ---- build every device shell, all kept loaded so switching is instant ----
+  // ---- build every device shell; frames load on demand (see ensureLoaded) ----
   Object.keys(PAGES).forEach(function (key) {
     var d = document.createElement('div');
     d.className = 'device';
@@ -218,10 +224,31 @@
       '<div class="screen"><iframe title="' + PAGES[key].name + ' concept" loading="eager"></iframe></div>';
     stage.appendChild(d);
     var iframe = d.querySelector('iframe');
-    iframe.src = PAGES[key].src;
-    devices[key] = { wrap: d, chrome: d.querySelector('.chrome'), screen: d.querySelector('.screen'), iframe: iframe, ready: false };
-    iframe.addEventListener('load', function () { devices[key].ready = true; hideLoaderMaybe(); layout(); });
+    devices[key] = { wrap: d, chrome: d.querySelector('.chrome'), screen: d.querySelector('.screen'), iframe: iframe, ready: false, loaded: false, height: 0 };
+    iframe.addEventListener('load', function () {
+      var dev = devices[key];
+      // ignore the about:blank swap when unloading (it can land after a quick reload)
+      try { if (!dev.loaded || iframe.contentWindow.location.href === 'about:blank') return; } catch (e) {}
+      dev.ready = true; hideLoaderMaybe();
+      // late images (photos, map tiles) change the page height: re-measure when they land
+      try { iframe.contentWindow.document.addEventListener('load', scheduleLayout, true); } catch (e) {}
+      settle();
+    });
   });
+
+  function ensureLoaded(key) {
+    var dev = devices[key];
+    if (dev.loaded) return;
+    dev.loaded = true; dev.ready = false; dev.height = 0;
+    dev.iframe.src = PAGES[key].src;
+  }
+
+  function unload(key) {
+    var dev = devices[key];
+    if (!dev.loaded) return;
+    dev.loaded = false; dev.ready = false; dev.height = 0;
+    dev.iframe.src = 'about:blank';
+  }
 
   function hideLoaderMaybe(){ if (devices[state.design] && devices[state.design].ready) loading.classList.add('hide'); }
 
@@ -262,14 +289,20 @@
     var pad = view === 'mobile' ? BEZEL : 0;
     var avail = stage.clientWidth;
     var scale = Math.min(1, avail / (logical + pad));
+    var active = key === state.design;
 
-    dev.wrap.className = 'device ' + (view === 'mobile' ? 'is-mobile' : 'is-desktop') + (key === state.design ? ' active' : '');
+    dev.wrap.className = 'device ' + (view === 'mobile' ? 'is-mobile' : 'is-desktop') + (active ? ' active' : '');
     dev.iframe.style.width = logical + 'px';
-    pinViewportUnits(dev.iframe);
-    var measured = measure(dev.iframe);
-    // content has rendered; don't wait on the load event, which holds out for every remote photo
-    if (measured && !dev.ready) { dev.ready = true; hideLoaderMaybe(); }
-    var h = measured || FALLBACK[view];
+    // measuring forces a full layout of the concept, so only the one on show pays for it;
+    // the others are measured when they're switched to
+    if (active && dev.loaded) {
+      pinViewportUnits(dev.iframe);
+      var measured = measure(dev.iframe);
+      if (measured) dev.height = measured;
+      // content has rendered; don't wait on the load event, which holds out for every remote photo
+      if (measured && !dev.ready) { dev.ready = true; hideLoaderMaybe(); }
+    }
+    var h = dev.height || FALLBACK[view];
 
     var screenW = logical * scale;
     dev.screen.style.width = screenW + 'px';
@@ -280,13 +313,38 @@
   }
 
   function layout() {
-    // size every device so the inactive ones are measured and ready to reveal instantly
     Object.keys(PAGES).forEach(sizeDevice);
     // stage height follows the active device's real box
     stage.style.height = devices[state.design].wrap.getBoundingClientRect().height + 'px';
+    // big screens warm up the other concepts once the first is on show, so switching is instant
+    if (!LIGHT && devices[state.design].ready) Object.keys(PAGES).forEach(ensureLoaded);
+  }
+
+  var rafPending = false;
+  function scheduleLayout() {
+    if (rafPending) return; rafPending = true;
+    requestAnimationFrame(function () { rafPending = false; layout(); });
+  }
+
+  // keep correcting height while fonts, images, and the React render settle in, then stop:
+  // polling forever reflowed the page every second and made scrolling stutter
+  var settleTimer = null;
+  function settle() {
+    clearInterval(settleTimer);
+    var ticks = 0, still = 0, last = -1;
+    settleTimer = setInterval(function () {
+      layout();
+      var dev = devices[state.design];
+      still = dev.ready && dev.height === last ? still + 1 : 0;
+      last = dev.height;
+      // stable for ~2s, or give up after ~20s (late image loads still re-measure on their own)
+      if (still >= 8 || ++ticks > 80) clearInterval(settleTimer);
+    }, 250);
   }
 
   function apply() {
+    if (LIGHT) Object.keys(PAGES).forEach(function (k) { if (k !== state.design) unload(k); });
+    ensureLoaded(state.design);
     document.getElementById('capDesign').textContent = PAGES[state.design].name.toUpperCase();
     document.getElementById('capView').textContent = state.view.toUpperCase();
     document.getElementById('openFull').href = PAGES[state.design].src;
@@ -298,6 +356,7 @@
     });
     loading.classList.toggle('hide', devices[state.design].ready);
     layout();
+    settle();
   }
 
   document.getElementById('seg-design').addEventListener('click', function (e) {
@@ -309,17 +368,14 @@
     state.view = b.dataset.view; apply();
   });
 
-  var rafPending = false;
+  // phones fire resize whenever the address bar slides in or out mid-scroll;
+  // only a width change affects the layout
+  var lastWidth = window.innerWidth;
   window.addEventListener('resize', function () {
-    if (rafPending) return; rafPending = true;
-    requestAnimationFrame(function () { rafPending = false; layout(); });
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+    scheduleLayout();
   });
-
-  // keep correcting height as fonts, images, and the React render settle in
-  // (faster at first so the loader clears as soon as the concept renders)
-  var ticks = 0;
-  var fast = setInterval(function () { layout(); if (++ticks > 20) clearInterval(fast); }, 250);
-  setInterval(layout, 900);
 
   apply();
 })();

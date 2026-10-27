@@ -281,7 +281,7 @@ class Component extends DCLogic {
     js.onload = () => {
       const L = window.L, store = [31.8725779, -102.3816408];
       const directions = 'https://www.google.com/maps/search/?api=1&query=3126+Andrews+Hwy%2C+Odessa%2C+TX+79762';
-      const map = L.map(el, { scrollWheelZoom: false }).setView(store, 16);
+      const map = L.map(el, { scrollWheelZoom: false, dragging: !L.Browser.mobile }).setView(store, 16);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
